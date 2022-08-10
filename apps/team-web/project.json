@@ -1,0 +1,88 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/team-web/src",
+  "prefix": "demo-ionic-web-app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/team-web",
+        "index": "apps/team-web/src/index.html",
+        "main": "apps/team-web/src/main.ts",
+        "polyfills": "apps/team-web/src/polyfills.ts",
+        "tsConfig": "apps/team-web/tsconfig.app.json",
+        "inlineStyleLanguage": "less",
+        "assets": ["apps/team-web/src/favicon.ico", "apps/team-web/src/assets"],
+        "styles": ["./node_modules/bootstrap/dist/css/bootstrap.css",
+        "apps/team-web/src/styles.less"],
+        "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.js"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/team-web/src/environments/environment.ts",
+              "with": "apps/team-web/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "team-web:build:production"
+        },
+        "development": {
+          "browserTarget": "team-web:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "team-web:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/team-web/**/*.ts", "apps/team-web/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/team-web"],
+      "options": {
+        "jestConfig": "apps/team-web/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

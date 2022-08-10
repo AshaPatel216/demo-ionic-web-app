@@ -1,5 +1,12 @@
 {
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
-  "projects": {}
+  "projects": {
+    "candidate-web": "apps/candidate-web",
+    "candidate-web-e2e": "apps/candidate-web-e2e",
+    "team-mobile": "apps/team-mobile",
+    "team-mobile-e2e": "apps/team-mobile-e2e",
+    "team-web": "apps/team-web",
+    "team-web-e2e": "apps/team-web-e2e"
+  }
 }

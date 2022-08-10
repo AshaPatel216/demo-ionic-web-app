@@ -1,0 +1,93 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/candidate-web/src",
+  "prefix": "demo-ionic-web-app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/candidate-web",
+        "index": "apps/candidate-web/src/index.html",
+        "main": "apps/candidate-web/src/main.ts",
+        "polyfills": "apps/candidate-web/src/polyfills.ts",
+        "tsConfig": "apps/candidate-web/tsconfig.app.json",
+        "inlineStyleLanguage": "less",
+        "assets": [
+          "apps/candidate-web/src/favicon.ico",
+          "apps/candidate-web/src/assets"
+        ],
+        "styles": ["apps/candidate-web/src/styles.less"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/candidate-web/src/environments/environment.ts",
+              "with": "apps/candidate-web/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "candidate-web:build:production"
+        },
+        "development": {
+          "browserTarget": "candidate-web:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "candidate-web:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/candidate-web/**/*.ts",
+          "apps/candidate-web/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/candidate-web"],
+      "options": {
+        "jestConfig": "apps/candidate-web/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
